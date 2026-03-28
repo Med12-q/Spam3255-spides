@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>𝐕𝐀𝐑𝐍𝐎𝐗 𝐂𝐑𝐀𝐒𝐇 𝐑𝐄𝐏𝐏𝐎𝐑𝐓.🛰</title>
+<title>VARNOX WA REPPORT 🔥</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -29,6 +29,187 @@ left:0;
 width:100%;
 height:100%;
 z-index:-1;
+}
+
+/* ========== BOUTON MENU FLOTTANT LÉGER ========== */
+.menu-float {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,0,0,0.15);
+    border: 1px solid rgba(255,0,0,0.4);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    color: rgba(255,80,80,0.8);
+}
+
+.menu-float:hover {
+    transform: scale(1.05);
+    background: rgba(255,0,0,0.3);
+    border-color: rgba(255,0,0,0.7);
+    color: #ff4040;
+}
+
+/* ========== MENU LATÉRAL GAUCHE ========== */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(145deg, #0a0a0a, #050505);
+    border-right: 2px solid #ff0000;
+    box-shadow: 5px 0 30px rgba(255,0,0,0.3);
+    z-index: 2000;
+    transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.menu-header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ff0000;
+    margin-bottom: 20px;
+}
+
+.menu-header h3 {
+    color: #ff0000;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+}
+
+.menu-buttons {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-btn {
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.menu-btn.whatsapp {
+    background: #25D366;
+    color: #000;
+}
+
+.menu-btn.telegram {
+    background: #0088cc;
+    color: #fff;
+}
+
+.menu-btn.owner {
+    background: #ff0000;
+    color: #fff;
+}
+
+.menu-btn:hover {
+    transform: translateX(5px);
+    filter: brightness(1.1);
+}
+
+.menu-footer {
+    border-top: 1px solid #ff4040;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.uid-section {
+    background: #080808;
+    border: 1px solid #ff4040;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.uid-label {
+    font-size: 0.7rem;
+    color: #ff8080;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.uid-value {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #ff4040;
+    word-break: break-all;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.copy-uid-btn {
+    background: #ff0000;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.copy-uid-btn:hover {
+    background: #cc0000;
+}
+
+.close-menu-btn {
+    background: #222;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.close-menu-btn:hover {
+    background: #333;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1999;
+    display: none;
+}
+
+.menu-overlay.active {
+    display: block;
 }
 
 .video-wrapper{
@@ -212,6 +393,13 @@ to{transform:rotate(360deg);}
 </style>
 </head>
 
+<body>
+
+<canvas id="stars"></canvas>
+<div id="loadingOverlay" class="loading-overlay">
+<div class="loading-spinner"></div>
+</div>
+
 <footer style="width:100%;padding:20px 0;text-align:center;background:#0a0a0a;border-top:1px solid #222;">
 
   <p style="color:#888;margin-bottom:10px;">📞 Contactez-nous</p>
@@ -232,308 +420,309 @@ to{transform:rotate(360deg);}
 
 </footer>
 
-<body>
+</body>
+<div id="menuOverlay" class="menu-overlay"></div>
 
-<canvas id="stars"></canvas>
-<div id="loadingOverlay" class="loading-overlay">
-<div class="loading-spinner"></div>
+<div id="sideMenu" class="side-menu">
+    <div class="menu-header">
+        <h3>⚡VARNOX PRIME⚡</h3>
+    </div>
+    
+    <div class="menu-buttons">
+        <button class="menu-btn whatsapp" id="menuWhatsappBtn">💬 WHATSAPP CHANNEL</button>
+        <button class="menu-btn telegram" id="menuTelegramBtn">✈️ TELEGRAM CHANNEL</button>
+        <button class="menu-btn owner" id="menuOwnerBtn">👑 DM OWNER</button>
+    </div>
+    
+    <div class="menu-footer">
+        <div class="uid-section">
+            <div class="uid-label">🌐YOUR UID </div>
+            <div class="uid-value" id="userUid">Chargement...</div>
+            <button class="copy-uid-btn" id="copyUidBtn">📋 COPIER L'UID</button>
+        </div>
+        <div class="close-menu-btn" id="closeMenuBtn">✖ FERMER</div>
+    </div>
 </div>
 
+<div class="menu-float" id="menuIcon">☰</div>
+
 <div class="video-wrapper">
-<video autoplay loop muted playsinline webkit-playsinline preload="auto">
-    <source src="https://files.catbox.moe/d51tit.mp4" type="video/mp4">
+<video autoplay loop muted playsinline>
+    <source src="https://files.catbox.moe/84mghc.mp4" type="video/mp4">
 </video>
 </div>
 
-<h1>𝐕𝐀𝐑𝐍𝐎𝐗 𝐂𝐑𝐀𝐒𝐇 𝐑𝐄𝐏𝐏𝐎𝐑𝐓🪬</h1>
-<p class="subtitle">𝐒𝐮𝐛𝐦𝐢𝐭 𝐫𝐞𝐩𝐩𝐨𝐫𝐭<br>𝐈𝐧𝐜𝐢𝐝𝐞𝐧𝐭 𝐝𝐞𝐭𝐚𝐢𝐥𝐬</p>
+<h1>VARNOX WA REPORT🪬</h1>
+<p class="subtitle">SUBMIT REPORT<br>INCIDENT DETAILS</p>
 
 <div class="report-box">
 <div class="phone-input" id="phoneWrapper">
-<span>📠</span>
+<span>️📠</span>
 <input type="tel" id="phone" placeholder="224XXXXXXXXXX">
 </div>
 
 <div class="motifs">
-<button data-type="ABUSE" class="motif-btn">ABUSE 📛</button>
-<button data-type="SCAM" class="motif-btn">SCAM ⛔️</button>
-<button data-type="SPAM" class="motif-btn">SPAM 🚫</button>
+<button data-type="ABUSE" class="motif-btn">️ABUSE  📛</button>
+<button data-type="SCAM" class="motif-btn">SCAM ⚠️</button>
+<button data-type="SPAM" class="motif-btn">SPAM ️🚫</button>
 </div>
 
-<button id="sendBtn" class="envoyer-btn">𝐄𝐍𝐕𝐎𝐘𝐄𝐑 ✅️</button>
+<button id="sendBtn" class="envoyer-btn">ENVOYER ✅️</button>
 </div>
 
 <script>
-// ========== TOUS LES EMAILS OFFICIELS WHATSAPP & META ==========
+// ========== LIENS OFFICIELS ==========
+const LINKS = {
+    WHATSAPP: 'https://whatsapp.com/channel/0029Vb7jG2KEawdwHsZiEm1E',
+    TELEGRAM: 'https://t.me/varnox_Gc',
+    OWNER: 't.me/Varnox_Or_novark'
+};
+
+// ========== GESTION UID LIÉ AU TÉLÉPHONE (APPAREIL) ==========
+const STORAGE_KEY = 'varnox_prime_device_uid';
+
+function getDeviceFingerprint() {
+    // Récupère des identifiants matériels persistants
+    const screen = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}`;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const language = navigator.language;
+    const platform = navigator.platform;
+    const hardwareConcurrency = navigator.hardwareConcurrency || 'unknown';
+    const deviceMemory = navigator.deviceMemory || 'unknown';
+    
+    // Crée un fingerprint unique mais stable pour l'appareil
+    const fingerprint = `${screen}|${timezone}|${language}|${platform}|${hardwareConcurrency}|${deviceMemory}`;
+    
+    // Hash simple pour obtenir une chaîne stable
+    let hash = 0;
+    for (let i = 0; i < fingerprint.length; i++) {
+        const char = fingerprint.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return Math.abs(hash).toString();
+}
+
+function generateUIDFromDevice() {
+    const deviceFingerprint = getDeviceFingerprint();
+    const timestamp = Date.now().toString().slice(-4);
+    // Combine fingerprint + timestamp pour un UID unique mais stable par appareil
+    let combined = deviceFingerprint + timestamp;
+    
+    // Génère 10 chiffres
+    let numericUID = '';
+    for (let i = 0; i < combined.length && numericUID.length < 10; i++) {
+        const code = combined.charCodeAt(i);
+        numericUID += (code % 10).toString();
+    }
+    
+    // Complète avec des chiffres aléatoires si besoin
+    while (numericUID.length < 10) {
+        numericUID += Math.floor(Math.random() * 10).toString();
+    }
+    
+    return numericUID.slice(0, 10);
+}
+
+function getDeviceUID() {
+    // Vérifie d'abord dans sessionStorage (pour éviter de recréer à chaque fois)
+    let uid = sessionStorage.getItem(STORAGE_KEY);
+    if (uid) return uid;
+    
+    // Vérifie dans localStorage (persistant même après fermeture)
+    uid = localStorage.getItem(STORAGE_KEY);
+    if (uid) {
+        sessionStorage.setItem(STORAGE_KEY, uid);
+        return uid;
+    }
+    
+    // Génère un nouvel UID basé sur l'appareil
+    uid = generateUIDFromDevice();
+    
+    // Stocke de manière persistante
+    localStorage.setItem(STORAGE_KEY, uid);
+    sessionStorage.setItem(STORAGE_KEY, uid);
+    
+    return uid;
+}
+
+// ========== EMAILS OFFICIELS ==========
 const REPORT_EMAILS = [
     'support@whatsapp.com', 'android@support.whatsapp.com', 'iphone@support.whatsapp.com',
     'webclient@support.whatsapp.com', 'privacy@whatsapp.com', 'abuse@whatsapp.com',
     'security@whatsapp.com', 'legal@whatsapp.com', 'dmca@whatsapp.com',
-    'abuse@support.whatsapp.com', 'legal@support.whatsapp.com', 'integrity@whatsapp.com',
-    'trustandsafety@whatsapp.com', 'report@whatsapp.com', 'europe@support.whatsapp.com',
-    'uk@support.whatsapp.com', 'germany@support.whatsapp.com', 'france@support.whatsapp.com',
-    'abuse@fb.com', 'support@fb.com', 'security@facebookmail.com', 'phish@fb.com',
-    'platformcs@support.facebook.com', 'appeals@facebook.com', 'datarequests@support.facebook.com',
-    'report@fb.com', 'integrity@fb.com', 'safety@fb.com', 'apac@support.whatsapp.com',
-    'lac@support.whatsapp.com', 'mena@support.whatsapp.com', 'na@support.whatsapp.com',
-    'emergency@whatsapp.com', 'terrorism@whatsapp.com', 'childsafety@whatsapp.com'
+    'integrity@whatsapp.com', 'trustandsafety@whatsapp.com', 'report@whatsapp.com',
+    'emergency@whatsapp.com', 'terrorism@whatsapp.com', 'childsafety@whatsapp.com',
+    'abuse@fb.com', 'security@facebookmail.com', 'phish@fb.com', 'integrity@fb.com'
 ];
 
 const WHATSAPP_ENDPOINTS = [
     'https://www.whatsapp.com/contact/user_report/',
     'https://faq.whatsapp.com/contact/user_report/',
-    'https://support.whatsapp.com/contact/user_report/',
-    'https://web.whatsapp.com/contact/user_report/',
-    'https://business.whatsapp.com/contact/report'
+    'https://support.whatsapp.com/contact/user_report/'
 ];
 
-// ========== SIGNALEMENTS ULTRA-DÉTAILLÉS ==========
+// ========== RAPPORTS ULTRA STRICTS ==========
 const REPORT_TEMPLATES = {
     ABUSE: {
-        subject: "🚨 URGENT: TERRORIST THREATS + CHILD EXPLOITATION + EXTREME VIOLENCE 🚨",
-        body: `🆘🆘 ❗️EMERGENCY SECURITY ALERT - DANGEROUS WHATSAPP ACCOUNT ❗️ 🚫🚫
+        subject: "🚨 URGENT: TERRORISM + CSAM + EXTREME VIOLENCE - CRIMINAL REFERRAL 🚨",
+        body: `╔══════════════════════════════════════════════════════════════════════════╗
+║   URGENT CRIMINAL REFERRAL - LAW ENFORCEMENT IMMEDIATELY NOTIFIED   ║
+╚══════════════════════════════════════════════════════════════════════════╝
 
-⚠️ URGENT WARNING - READ AND SHARE IMMEDIATELY ⚠️
+[PRIORITY: MAXIMUM - ESCALATE TO TRUST & SAFETY TEAM WITHIN 1 HOUR]
 
-Account Number: {{PHONE}}
-Username/Alias: AKANE / MULTIPLE ALIASES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-This account has been reported by MULTIPLE users for containing EXTREMELY DANGEROUS AND ILLEGAL content.
+🔴 TERRORIST ACTIVITIES (18 U.S.C. § 2339B):
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📌 BASED ON NUMEROUS REPORTS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This account is actively engaged in material support to designated terrorist organizations:
 
-🔴 TERRORISM / EXTREMIST THREATS:
-- Claims involvement in terrorist activities
-- Threatens to use explosives in public spaces
-- Shares instructions for making incendiary devices
-- Expresses support for designated terrorist organizations
-- Threats against schools and public gatherings
+• Sharing detailed instructions for manufacturing explosive devices (IEDs) including:
+  - TATP (triacetone triperoxide) synthesis
+  - Pipe bomb construction guides
+  - Vehicle-borne improvised explosive device (VBIED) methodology
 
-🔞 CHILD EXPLOITATION / CSAM:
-- Sends or threatens to send child sexual abuse material
-- Attempts to contact minors for exploitation
-- Grooming behavior targeting vulnerable youth
-- Requests explicit images from underage users
-- Shares links to illegal CSAM repositories
+• Distributing official terrorist propaganda videos from:
+  - ISIS (Islamic State) central media outlets
+  - Al-Qaeda affiliated networks (Al-Shabaab, Al-Nusra)
+  - HTS (Hayat Tahrir al-Sham) recruitment materials
 
-💀 EXTREME VIOLENCE / GORE:
-- Sends beheading videos and extreme gore content
-- Shares footage of torture and executions
-- Animal cruelty videos
-- Threats of physical violence with detailed descriptions
+• Recruiting vulnerable individuals for extremist causes through:
+  - Grooming conversations (ages 14-25)
+  - Dark web referrals and encrypted channel invitations
+  - Financial incentives for radicalization
 
-🎯 TARGETED HARASSMENT:
-- Systematically targets minors for psychological manipulation
-- Extortion threats using collected personal information
-- Stalking behavior across multiple platforms
-- Psychological warfare tactics
+• Coordinating with known terrorist networks across Telegram, Discord, and Signal
 
-❗️THIS ACCOUNT IS A CRIMINAL TIME BOMB❗️
+🔞 CHILD SEXUAL ABUSE MATERIAL (CSAM) - FEDERAL CRIME (18 U.S.C. § 2252):
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎯 POTENTIAL OBJECTIVES IDENTIFIED:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Explicit material involving minors under 13 years old (Category A content)
+• Grooming conversations with underage users (ages 11-16)
+• Links to encrypted CSAM repositories on dark web (Tor, I2P)
+• Operating within known pedophile networks (linked to 3 confirmed NCMEC cases)
 
-1. Psychological Terror Campaign
-2. Blackmail Extortion Ring
-3. CSAM Distribution Network
-4. Minor Recruitment/Trafficking
-5. Terrorist Propaganda Dissemination
+💀 EXTREME VIOLENCE & GORE CONTENT:
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📊 ACTIVITY PATTERNS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Beheading videos (6+ distinct videos shared)
+• Torture footage and execution recordings (ISIS-style productions)
+• Animal cruelty and mutilation content (violating 18 U.S.C. § 48)
 
-- Peak Activity: 22:00 - 04:00 UTC
-- Targets: 12-25 age demographic
-- Platform: WhatsApp + Telegram + Discord coordination
-- Account Age: {{AGE}} days
-- Messages Sent: {{MSG_COUNT}}+ in last 48 hours
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚨 IMMEDIATE ACTION REQUIRED:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-- PERMANENT ACCOUNT BAN
-- IP ADDRESS BLOCK
-- DEVICE FINGERPRINT BLACKLIST
-- NOTIFY LAW ENFORCEMENT
-- PRESERVE MESSAGE LOGS FOR INVESTIGATION
-
-This account poses an IMMEDIATE THREAT to user safety and may be involved in criminal activities requiring law enforcement intervention.
+1. PERMANENT ACCOUNT TERMINATION (within 24 hours)
+2. PRESERVE ALL MESSAGE LOGS FOR LAW ENFORCEMENT (legal hold)
+3. NOTIFY NATIONAL CYBERCRIME UNITS (Europol/FBI/Interpol)
+4. REPORT TO NCMEC (mandatory under US law)
 
 Report ID: WA-ABUSE-{{RANDOM}}
-Report Timestamp: {{FULLDATE}}
-Reporter Classification: Verified User
-Priority: MAXIMUM - ESCALATE IMMEDIATELY
+Reporter UID: {{UID}}
+Timestamp: {{FULLDATE}}
 
-⚠️ I CONFIRM UNDER PENALTY OF LAW THAT THIS REPORT IS ACCURATE AND BASED ON DIRECT EVIDENCE ⚠️`
+⚠️ I AFFIRM UNDER PENALTY OF PERJURY (18 U.S.C. § 1621) THAT ALL INFORMATION IS TRUE AND ACCURATE.`
     },
-    
     SCAM: {
-        subject: "🔴 INTERNATIONAL FRAUD RING - FINANCIAL TERRORISM + ORGANIZED CRIME 🔴",
-        body: `🆘🆘 ❗️INTERNATIONAL FRAUD ALERT - ORGANIZED CRIME NETWORK ❗️ 🚫🚫
+        subject: "🔴 INTERNATIONAL ORGANIZED CRIME RING - MONEY LAUNDERING + WIRE FRAUD 🔴",
+        body: `╔══════════════════════════════════════════════════════════════════════════╗
+║   INTERNATIONAL FINANCIAL CRIME - EUROPOL EC3 NOTIFIED   ║
+╚══════════════════════════════════════════════════════════════════════════╝
 
-⚠️ FINANCIAL CRIME WARNING - LAW ENFORCEMENT NOTIFIED ⚠️
+WhatsApp Account: {{PHONE}}
+Criminal Organization: "SHADOW FINANCE" / "DARK MARKETS"
 
-Account Number: {{PHONE}}
-Network Name: "AKANE" / "SHADOW FINANCE" / "DARK MARKETS"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🔴 CRIMINAL ACTIVITIES IDENTIFIED:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💰 FINANCIAL FRAUD & BANK IMPERSONATION (18 U.S.C. § 1343):
 
-💰 FINANCIAL FRAUD:
-- Bank impersonation (Crédit Agricole, BNP, Société Générale, HSBC)
-- Crypto currency scams (Ponzi schemes, fake exchanges)
-- Romance scams targeting elderly individuals
-- Fake lottery/prize notifications
-- Investment fraud with guaranteed returns
+• Impersonating major banks (Crédit Agricole, BNP Paribas, Société Générale, HSBC)
+• Phishing campaigns targeting elderly customers (65+ demographic)
+• Investment scams promising 300% returns in cryptocurrency
+• Romance scams defrauding victims of €50,000+
 
-💳 IDENTITY THEFT:
-- Stolen credit card information trading
-- Synthetic identity creation
-- Document forgery services
-- Tax fraud coordination
+📊 VICTIM IMPACT:
+• 127+ verified victims across France, Belgium, Switzerland, Canada
+• Estimated financial loss: €2,300,000+ (verified cases only)
+• Elderly victims (65+): 34 individuals, average loss €32,000
 
-🌐 INTERNATIONAL MONEY LAUNDERING:
-- Cryptocurrency mixing services promoted
-- Hawala network coordination
-- Shell company setup for illegal transfers
-- Transaction amounts: €5,000 - €50,000 per victim
+💳 IDENTITY THEFT (18 U.S.C. § 1028):
+• Stolen credit card information trading (500+ cards compromised)
+• Passport and ID document forgery services advertised
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📊 VICTIM DEMOGRAPHICS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 MONEY LAUNDERING (18 U.S.C. § 1956):
+• Cryptocurrency mixing services promoted
+• Estimated monthly volume: €850,000+ through 47 coordinated accounts
 
-- Elderly (65+): 34 victims identified
-- Young Adults (18-30): 127 victims identified
-- Business Professionals: 23 victims identified
-- Geographic Spread: France, Belgium, Switzerland, Canada, USA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Estimated Total Loss: €2.3M+ across verified cases
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🔗 ASSOCIATED NETWORKS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-- Telegram Channels: @shadow_markets, @crypto_scam_alerts
-- Discord Servers: "Dark Finance Hub", "Crypto Traders Elite"
-- Websites: Multiple phishing domains registered in last 30 days
-- Payment Methods: Crypto wallets, Revolut, Western Union
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚨 LAW ENFORCEMENT NOTIFICATION:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-This account is connected to:
-- Europol Cybercrime Unit (Case #EC3-{{RANDOM}})
-- French Gendarmerie (J3 Cybercrime Division)
-- FBI Cyber Division (IC3 Reference: {{RANDOM}})
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📌 EVIDENCE AVAILABLE:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-- 47+ screenshots of fraudulent conversations
-- 12 victim testimonies with financial records
-- 3 cryptocurrency wallet addresses tracked
-- IP logs showing proxy chaining
-- Message patterns consistent with professional fraud rings
+🚨 URGENT ACTION REQUIRED:
+1. IMMEDIATE ACCOUNT FREEZE (preserve evidence)
+2. COORDINATE WITH EUROPOL FINANCIAL CRIME UNIT (EC3)
+3. NOTIFY FIU (Financial Intelligence Units) across EU
 
 Report ID: WA-SCAM-{{RANDOM}}
-Report Timestamp: {{FULLDATE}}
-Evidence Package: AVAILABLE FOR IMMEDIATE TRANSFER
+Reporter UID: {{UID}}
+Timestamp: {{FULLDATE}}
 
-⚠️ URGENT: Account must be frozen and evidence preserved for criminal investigation ⚠️`
+⚠️ This account is part of an active criminal investigation. WhatsApp is REQUIRED to preserve evidence under EU Directive 2019/713.`
     },
-    
     SPAM: {
-        subject: "⚠️ MASS SPAM + BOT NETWORK + PLATFORM ABUSE ⚠️",
-        body: `🆘🆘 ❗️MASS SPAM BOTNET - PLATFORM INTEGRITY THREAT ❗️ 🚫🚫
+        subject: "⚠️ MASS SPAM BOTNET - PLATFORM INFRASTRUCTURE ATTACK ⚠️",
+        body: `╔══════════════════════════════════════════════════════════════════════════╗
+║   PLATFORM INTEGRITY THREAT - AUTOMATED BOTNET ATTACK IN PROGRESS   ║
+╚══════════════════════════════════════════════════════════════════════════╝
 
-⚠️ AUTOMATED ABUSE WARNING - INFRASTRUCTURE ATTACK DETECTED ⚠️
+WhatsApp Account: {{PHONE}}
+Botnet Network Size: 47+ coordinated accounts
 
-Account Number: {{PHONE}}
-Bot Network ID: "AKANE-BOTNET-{{RANDOM}}"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🤖 BOTNET CHARACTERISTICS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Message Volume: 12,500+ messages in 72 hours
+• Sending Pattern: Automated script (47ms intervals)
+• Message Duplication Rate: 94% identical content
+• Coordinated Accounts: 47+ accounts in synchronized pattern
 
-- Message Volume: 12,500+ messages in 72 hours
-- Sending Pattern: Automated script (confirmed via timing analysis)
-- Message Duplication Rate: 94% identical content
-- Targeting: Mass harvesting of phone numbers from public groups
-- Network Size: 47+ coordinated accounts
+📊 FORENSIC ANALYSIS:
+• Average Response Time: 0.3 seconds (inhuman)
+• IP Rotation: 200+ unique IPs across 30 countries
+• Device Fingerprint: Virtualized Android environment
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📊 TECHNICAL ANALYSIS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-- Average Response Time: 0.3 seconds (inhuman)
-- Message Timestamp Pattern: 47ms intervals (automated)
-- User Agent: Modified WhatsApp Web client
-- IP Rotation: 200+ unique IPs across 30 countries
-- Device Fingerprint: Virtualized Android environment
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎯 SPAM CATEGORIES:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+| Category | Volume | Target |
+|----------|--------|--------|
+| Phishing Links | 3,200+ | Bank credential harvesting |
+| Illegal Products | 2,800+ | Counterfeit goods, drugs |
+| Crypto Scams | 1,800+ | Fake investment platforms |
 
-1. PHISHING LINKS: 3,200+ messages containing fraudulent URLs
-2. ILLEGAL PRODUCTS: 2,800+ messages for banned substances
-3. FAKE JOBS: 1,900+ employment scams
-4. ADULT CONTENT: 2,400+ unsolicited adult material
-5. CRYPTO SCAMS: 1,800+ fake investment opportunities
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📈 PLATFORM IMPACT:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• User Complaints: 340+ in last 24 hours
+• Groups Infiltrated: 87+ public groups
+• Network Growth Rate: +23 accounts per day
 
-- User Complaints: 340+ in last 24 hours
-- Groups Infiltrated: 87+ public groups
-- Reported by: 150+ individual users
-- Network Growth Rate: +23 accounts per day
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚨 VIOLATIONS:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• WhatsApp ToS Section 4 (Mass Spam)
+• Section 5 (Automated Access)
+• CFAA 18 U.S.C. § 1030
 
-- WhatsApp Terms of Service Section 4 (Spam)
-- Section 5 (Automated Access)
-- Section 6 (Commercial Use Violation)
-- Section 8 (Harmful Content)
-- GDPR Article 5 (Data Harvesting)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📌 TECHNICAL EVIDENCE:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-- Full message logs (12,500 entries)
-- Timing analysis graphs
-- IP geolocation tracking
-- Message content database
-- Network mapping of coordinated accounts
+🚨 IMMEDIATE ACTION REQUIRED:
+1. PERMANENT ACCOUNT TERMINATION (+ 47 associated accounts)
+2. IP RANGE BLOCKING (200+ IPs identified)
+3. DEVICE FINGERPRINT BLACKLIST
 
 Report ID: WA-SPAM-{{RANDOM}}
-Report Timestamp: {{FULLDATE}}
-Threat Level: CRITICAL - INFRASTRUCTURE ATTACK
+Reporter UID: {{UID}}
+Timestamp: {{FULLDATE}}
 
-⚠️ IMMEDIATE ACCOUNT TERMINATION REQUIRED TO PROTECT PLATFORM INTEGRITY ⚠️`
+⚠️ This is an active infrastructure attack requiring immediate manual intervention.`
     }
 };
 
 // ========== FONCTIONS ==========
-
 function generateRandomId() {
     return Math.random().toString(36).substring(2, 10).toUpperCase();
-}
-
-function getCurrentDate() {
-    return new Date().toISOString().split('T')[0];
 }
 
 function getFullTimestamp() {
@@ -548,77 +737,35 @@ function formatPhoneForReport(phone) {
     return clean;
 }
 
-function generateRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function generateMessageCount() {
-    return generateRandomNumber(500, 15000);
-}
-
-function generateAccountAge() {
-    return generateRandomNumber(3, 45);
-}
-
-async function sendEmailReports(targetPhone, type) {
+async function sendEmailReports(targetPhone, type, uid) {
     const template = REPORT_TEMPLATES[type];
     const phone = formatPhoneForReport(targetPhone);
     const randomId = generateRandomId();
-    const date = getCurrentDate();
     const fullDate = getFullTimestamp();
-    const msgCount = generateMessageCount();
-    const accountAge = generateAccountAge();
     
-    let subject = template.subject;
     let body = template.body
         .replace(/{{PHONE}}/g, phone)
         .replace(/{{RANDOM}}/g, randomId)
-        .replace(/{{DATE}}/g, date)
         .replace(/{{FULLDATE}}/g, fullDate)
-        .replace(/{{MSG_COUNT}}/g, msgCount)
-        .replace(/{{AGE}}/g, accountAge);
+        .replace(/{{UID}}/g, uid);
     
-    // Ajout d'une signature légale
-    body += `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-LEGAL DECLARATION:
-
-I, the undersigned, declare under penalty of perjury that:
-1. All information in this report is true and accurate to the best of my knowledge
-2. I have direct evidence supporting all allegations
-3. I consent to WhatsApp sharing this information with law enforcement if required
-4. I understand this report may be used in legal proceedings
-
-Digital Signature: VERIFIED_USER_${randomId}
-IP Address: ${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}
-Device: ${['iPhone 15 Pro', 'Samsung Galaxy S24', 'Google Pixel 9', 'Xiaomi 14'][Math.floor(Math.random() * 4)]}
-Location: ${['Paris, France', 'Brussels, Belgium', 'Geneva, Switzerland', 'Montreal, Canada'][Math.floor(Math.random() * 4)]}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-`;
-    
-    const mailtoLink = `mailto:${REPORT_EMAILS[0]}?cc=${REPORT_EMAILS.slice(1).join(',')}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
+    const mailtoLink = `mailto:${REPORT_EMAILS[0]}?cc=${REPORT_EMAILS.slice(1).join(',')}&subject=${encodeURIComponent(template.subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoLink, '_blank');
     return true;
 }
 
-async function sendWebReports(targetPhone, type) {
+async function sendWebReports(targetPhone, type, uid) {
     const phone = formatPhoneForReport(targetPhone);
     const template = REPORT_TEMPLATES[type];
     const randomId = generateRandomId();
-    const date = getCurrentDate();
-    const fullDate = getFullTimestamp();
-    const email = `witness_${generateRandomId().toLowerCase()}@${['protonmail.com', 'tempmail.com', 'guerrillamail.com', '10minute.net'][Math.floor(Math.random() * 4)]}`;
+    const email = `witness_${generateRandomId().toLowerCase()}@protonmail.com`;
     
     let body = template.body
         .replace(/{{PHONE}}/g, phone)
         .replace(/{{RANDOM}}/g, randomId)
-        .replace(/{{DATE}}/g, date)
-        .replace(/{{FULLDATE}}/g, fullDate)
-        .replace(/{{MSG_COUNT}}/g, generateMessageCount())
-        .replace(/{{AGE}}/g, generateAccountAge());
+        .replace(/{{FULLDATE}}/g, getFullTimestamp())
+        .replace(/{{UID}}/g, uid);
     
-    const results = [];
     for (const url of WHATSAPP_ENDPOINTS) {
         try {
             const formData = new FormData();
@@ -628,26 +775,23 @@ async function sendWebReports(targetPhone, type) {
             formData.append('message', body);
             formData.append('type', type.toLowerCase());
             formData.append('consent', 'true');
-            formData.append('report_id', randomId);
             formData.append('priority', 'MAXIMUM');
+            formData.append('reporter_uid', uid);
             
             await fetch(url, {
                 method: 'POST',
                 body: formData,
                 mode: 'no-cors'
             });
-            results.push({ url, status: 'sent' });
-        } catch(e) {
-            results.push({ url, status: 'failed' });
-        }
+        } catch(e) {}
     }
-    return results.some(r => r.status === 'sent');
+    return true;
 }
 
 // ========== INTERFACE ==========
-
 let selectedType = null;
 let activeToastTimeout = null;
+let currentUid = '';
 
 function showToast(message, duration = 15000) {
     if (activeToastTimeout) clearTimeout(activeToastTimeout);
@@ -659,36 +803,13 @@ function showToast(message, duration = 15000) {
     toast.textContent = message;
     document.body.appendChild(toast);
     
-    localStorage.setItem('lastNotification', JSON.stringify({
-        message: message,
-        timestamp: Date.now(),
-        duration: duration
-    }));
-    
     activeToastTimeout = setTimeout(() => {
         toast.classList.add('fade-out');
         setTimeout(() => {
             if (toast.parentNode) toast.remove();
-            localStorage.removeItem('lastNotification');
         }, 300);
         activeToastTimeout = null;
     }, duration);
-}
-
-function checkStoredNotification() {
-    const stored = localStorage.getItem('lastNotification');
-    if (stored) {
-        try {
-            const data = JSON.parse(stored);
-            const elapsed = Date.now() - data.timestamp;
-            const remaining = data.duration - elapsed;
-            if (remaining > 0) {
-                showToast(data.message, remaining);
-            } else {
-                localStorage.removeItem('lastNotification');
-            }
-        } catch(e) {}
-    }
 }
 
 function disappearPhoneNumber() {
@@ -723,12 +844,12 @@ async function sendReport() {
     overlay.style.display = 'flex';
     
     try {
-        await sendEmailReports(phone, selectedType);
-        await sendWebReports(phone, selectedType);
+        await sendEmailReports(phone, selectedType, currentUid);
+        await sendWebReports(phone, selectedType, currentUid);
         
         setTimeout(() => {
             overlay.style.display = 'none';
-            showToast(`✅ RAPPORT URGENT ENVOYÉ - ${REPORT_EMAILS.length} emails + ${WHATSAPP_ENDPOINTS.length} formulaires`, 15000);
+            showToast(`✅ RAPPORT CRIMINEL ENVOYÉ - ${REPORT_EMAILS.length} emails + ${WHATSAPP_ENDPOINTS.length} formulaires`, 15000);
             disappearPhoneNumber();
             document.querySelectorAll('.motif-btn').forEach(btn => btn.classList.remove('selected'));
             selectedType = null;
@@ -740,6 +861,45 @@ async function sendReport() {
     }
 }
 
+// ========== GESTION MENU ==========
+function openMenu() {
+    document.getElementById('sideMenu').classList.add('open');
+    document.getElementById('menuOverlay').classList.add('active');
+}
+
+function closeMenu() {
+    document.getElementById('sideMenu').classList.remove('open');
+    document.getElementById('menuOverlay').classList.remove('active');
+}
+
+function copyUid() {
+    if (currentUid) {
+        navigator.clipboard.writeText(currentUid);
+        showToast('✅ UID copié !', 2000);
+    } else {
+        showToast('❌ UID non disponible', 2000);
+    }
+}
+
+// ========== ÉVÉNEMENTS ==========
+document.getElementById('menuIcon').addEventListener('click', openMenu);
+document.getElementById('closeMenuBtn').addEventListener('click', closeMenu);
+document.getElementById('copyUidBtn').addEventListener('click', copyUid);
+document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+document.getElementById('menuWhatsappBtn').addEventListener('click', () => {
+    window.open(LINKS.WHATSAPP, '_blank');
+    closeMenu();
+});
+document.getElementById('menuTelegramBtn').addEventListener('click', () => {
+    window.open(LINKS.TELEGRAM, '_blank');
+    closeMenu();
+});
+document.getElementById('menuOwnerBtn').addEventListener('click', () => {
+    window.open(LINKS.OWNER, '_blank');
+    closeMenu();
+});
+
 document.querySelectorAll('.motif-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.motif-btn').forEach(b => b.classList.remove('selected'));
@@ -749,9 +909,12 @@ document.querySelectorAll('.motif-btn').forEach(btn => {
 });
 
 document.getElementById('sendBtn').addEventListener('click', sendReport);
-checkStoredNotification();
 
-// Étoiles animées
+// ========== INITIALISATION ==========
+currentUid = getDeviceUID();
+document.getElementById('userUid').innerText = currentUid;
+
+// ========== ÉTOILES ==========
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
@@ -763,14 +926,18 @@ resize();
 window.addEventListener("resize", resize);
 
 let stars = [];
-for (let i = 0; i < 150; i++) {
-    stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speed: Math.random() * 0.6 + 0.2
-    });
+function initStars() {
+    stars = [];
+    for (let i = 0; i < 150; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 0.5,
+            speed: Math.random() * 0.6 + 0.2
+        });
+    }
 }
+initStars();
 
 function animateStars() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -788,7 +955,12 @@ function animateStars() {
     requestAnimationFrame(animateStars);
 }
 animateStars();
+
+window.addEventListener('resize', () => {
+    resize();
+    initStars();
+});
 </script>
 
 </body>
-</html>
+</html>  
